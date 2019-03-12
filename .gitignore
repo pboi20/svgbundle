@@ -59,3 +59,13 @@ typings/
 
 # next.js build output
 .next
+
+# npm stuff
+package-lock.json
+
+# editor stuff
+*.swp
+.vimrc
+
+# other
+.DS_Store

@@ -1,0 +1,40 @@
+{
+  "name": "svgbundle",
+  "version": "0.0.1",
+  "description": "Optimize and bundle multiple SVG files",
+  "keywords": [
+    "svg",
+    "optimize",
+    "bundle"
+  ],
+  "homepage": "https://github.com/pboi20/svgbundle",
+  "bugs": {
+    "url": "https://github.com/pboi20/issues"
+  },
+  "author": {
+    "name": "Patrick Boivin",
+    "email": "pboivin@gmail.com",
+    "url": "https://github.com/pboi20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pboi20/svgbundle.git"
+  },
+  "main": "./src/svgbundle.js",
+  "bin": {
+    "svgbundle": "./bin/svgbundle"
+  },
+  "directories": {
+    "bin": "./bin",
+    "src": "./src"
+  },
+  "scripts": {},
+  "dependencies": {
+    "svgo": "^1.2.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "license": "MIT"
+}
