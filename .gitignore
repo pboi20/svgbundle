@@ -19,6 +19,6 @@ package-lock.json
 *.swp
 .vimrc
 
-# misc
+# other
 .DS_Store
-test/bundle.json
+test/output/bundle*
