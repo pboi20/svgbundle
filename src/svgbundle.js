@@ -2,11 +2,43 @@ const fs = require("fs");
 const path = require("path");
 const svgo = require("svgo");
 
+const JSON_MODE = "json";
+const ESM_MODE = "esm";
+const UMD_MODE = "umd";
+
+function makeESM(jsonOutput) {
+  return `export default ${jsonOutput};`;
+}
+
+function makeUMD(jsonOutput, moduleName) {
+  return `(function (root, factory) {
+  if (typeof module === 'object' && module.exports) { module.exports = factory(); }
+  else if (typeof define === 'function' && define.amd) { define([], factory); }
+  else { root.${moduleName} = factory(); }
+}(typeof self !== 'undefined' ? self : this, function () {
+  return ${jsonOutput};
+}));`;
+}
+
 class SvgBundle {
   constructor() {
     this._svgProcessor = new svgo();
     this._inputFiles = [];
     this._processedFiles = [];
+    this._outputMode = JSON_MODE;
+    this._bundleName = "MySvgBundle";
+  }
+
+  setOutputMode(mode) {
+    if (mode === ESM_MODE || mode === UMD_MODE) {
+      this._outputMode = mode;
+    } else {
+      this._outputMode = JSON_MODE;
+    }
+  }
+
+  setBundleName(name) {
+    this._bundleName = name;
   }
 
   addFile(inputFile) {
@@ -55,7 +87,15 @@ class SvgBundle {
     for (let item of this._processedFiles) {
       output[item.id] = item.content;
     }
-    return JSON.stringify(output);
+
+    let jsonOutput = JSON.stringify(output);
+    if (this._outputMode === ESM_MODE) {
+      return makeESM(jsonOutput);
+    }
+    else if (this._outputMode === UMD_MODE) {
+      return makeUMD(jsonOutput, this._bundleName);
+    }
+    return jsonOutput;
   }
 
   save(outputFile) {
@@ -63,6 +103,10 @@ class SvgBundle {
     fs.writeFileSync(outputFile, output);
   }
 }
+
+SvgBundle.JSON = JSON_MODE;
+SvgBundle.ESM = ESM_MODE;
+SvgBundle.UMD = UMD_MODE;
 
 module.exports = SvgBundle;
 
