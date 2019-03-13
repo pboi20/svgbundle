@@ -1,0 +1,33 @@
+<html>
+<head>
+  <script src="./output/bundle-umd.js"></script>
+</head>
+<body>
+  <div class="shape" id="circle"></div>
+  <div class="shape "id="square"></div>
+  <div class="shape" id="triangle"></div>
+
+  <script>
+    let circle = document.getElementById("circle");
+    circle.innerHTML = TestSvgBundle.circle;
+
+    let square = document.getElementById("square");
+    square.innerHTML = TestSvgBundle.square;
+
+    let triangle = document.getElementById("triangle");
+    triangle.innerHTML = TestSvgBundle.triangle;
+  </script>
+
+  <style>
+    .shape {
+      display: block;
+      border: 1px solid red;
+    }
+    .shape svg{
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</body>
+</html>
+
