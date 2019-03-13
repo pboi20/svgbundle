@@ -6,7 +6,6 @@ const bundler = new SvgBundle();
 
 const inputDir = path.resolve(__dirname, "img");
 const inputFiles = fs.readdirSync(inputDir);
-const outputFile = path.resolve(__dirname, "bundle.json");
 
 for (file of inputFiles) {
   let filePath = path.resolve(inputDir, file);
@@ -14,5 +13,15 @@ for (file of inputFiles) {
 }
 
 bundler.process().then(() => {
-  bundler.save(outputFile);
+  const jsonFile = path.resolve(__dirname, "output/bundle.json");
+  bundler.save(jsonFile);
+
+  const esmFile = path.resolve(__dirname, "output/bundle.js");
+  bundler.setOutputMode(SvgBundle.ESM);
+  bundler.save(esmFile);
+
+  const umdFile = path.resolve(__dirname, "output/bundle-umd.js");
+  bundler.setOutputMode(SvgBundle.UMD);
+  bundler.setBundleName("TestSvgBundle");
+  bundler.save(umdFile);
 });
