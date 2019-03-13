@@ -2,7 +2,13 @@ const fs = require("fs");
 const path = require("path");
 
 const SvgBundle = require("../src/svgbundle");
-const bundler = new SvgBundle();
+const bundler = new SvgBundle({
+  svgo: {
+    plugins: [
+      { removeViewBox: false }
+    ]
+  }
+});
 
 const inputDir = path.resolve(__dirname, "img");
 const inputFiles = fs.readdirSync(inputDir);

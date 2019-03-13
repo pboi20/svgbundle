@@ -20,13 +20,22 @@ function jsonToUMD(jsonContent, moduleName) {
 }));`;
 }
 
+function configure(options) {
+  let config = {
+    svgo: (options && options.svgo) || null,
+  }
+  return config;
+}
+
 class SvgBundle {
-  constructor() {
-    this._svgProcessor = new svgo();
+  constructor(options) {
     this._inputFiles = [];
     this._processedFiles = [];
     this._outputMode = JSON_MODE;
     this._bundleName = "MySvgBundle";
+
+    const config = configure(options);
+    this._svgProcessor = new svgo(config.svgo);
   }
 
   setOutputMode(mode) {
