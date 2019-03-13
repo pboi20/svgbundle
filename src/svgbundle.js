@@ -6,17 +6,17 @@ const JSON_MODE = "json";
 const ESM_MODE = "esm";
 const UMD_MODE = "umd";
 
-function makeESM(jsonOutput) {
-  return `export default ${jsonOutput};`;
+function jsonToESM(jsonContent) {
+  return `export default ${jsonContent};`;
 }
 
-function makeUMD(jsonOutput, moduleName) {
+function jsonToUMD(jsonContent, moduleName) {
   return `(function (root, factory) {
   if (typeof module === 'object' && module.exports) { module.exports = factory(); }
   else if (typeof define === 'function' && define.amd) { define([], factory); }
   else { root.${moduleName} = factory(); }
 }(typeof self !== 'undefined' ? self : this, function () {
-  return ${jsonOutput};
+  return ${jsonContent};
 }));`;
 }
 
@@ -90,10 +90,10 @@ class SvgBundle {
 
     let jsonOutput = JSON.stringify(output);
     if (this._outputMode === ESM_MODE) {
-      return makeESM(jsonOutput);
+      return jsonToESM(jsonOutput);
     }
     else if (this._outputMode === UMD_MODE) {
-      return makeUMD(jsonOutput, this._bundleName);
+      return jsonToUMD(jsonOutput, this._bundleName);
     }
     return jsonOutput;
   }
