@@ -1,6 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
+
+/*** Test file input/output ***/
+
 const SvgBundle = require("../src/svgbundle");
 const bundler = new SvgBundle({
   svgo: {
@@ -31,3 +34,14 @@ bundler.process().then(() => {
   bundler.setBundleName("TestSvgBundle");
   bundler.save(umdFile);
 });
+
+
+/*** Test config ***/
+
+const modes = [SvgBundle.JSON, SvgBundle.ESM, SvgBundle.UMD];
+for (let mode of modes) {
+  let bundler = new SvgBundle({ outputMode: mode});
+  if (mode !== bundler._outputMode) {
+    throw `Expected '${mode}', got '${bundler._outputMode}'`;
+  }
+}
