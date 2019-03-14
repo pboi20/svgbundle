@@ -28,11 +28,15 @@
     "bin": "./bin",
     "src": "./src"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "svgo": "^1.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  },
   "engines": {
     "node": ">=8.0.0"
   },
