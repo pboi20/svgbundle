@@ -24,6 +24,7 @@ function configure(options) {
   let config = {
     bundleName: (options && options.bundleName) || "MySvgBundle",
     outputMode: (options && options.outputMode) || JSON_MODE,
+    inputFiles: (options && options.inputFiles) || null,
     svgo: (options && options.svgo) || null,
   }
   return config;
@@ -35,9 +36,12 @@ class SvgBundle {
     this._processedFiles = [];
 
     const config = configure(options);
-    this._svgProcessor = new svgo(config.svgo);
-    this._outputMode = config.outputMode;
+    if (config.inputFiles) {
+      this.addFiles(config.inputFiles);
+    }
     this._bundleName = config.bundleName;
+    this._outputMode = config.outputMode;
+    this._svgProcessor = new svgo(config.svgo);
   }
 
   setOutputMode(mode) {
@@ -57,8 +61,10 @@ class SvgBundle {
   }
 
   addFiles(inputFiles) {
-    for (let file of inputFiles) {
-      this.addFile(file);
+    if (Array.isArray(inputFiles)) {
+      for (let file of inputFiles) {
+        this.addFile(file);
+      }
     }
   }
 
