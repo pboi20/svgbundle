@@ -22,6 +22,7 @@ function jsonToUMD(jsonContent, moduleName) {
 
 function configure(options) {
   let config = {
+    bundleName: (options && options.bundleName) || "MySvgBundle",
     outputMode: (options && options.outputMode) || JSON_MODE,
     svgo: (options && options.svgo) || null,
   }
@@ -32,11 +33,11 @@ class SvgBundle {
   constructor(options) {
     this._inputFiles = [];
     this._processedFiles = [];
-    this._bundleName = "MySvgBundle";
 
     const config = configure(options);
     this._svgProcessor = new svgo(config.svgo);
     this._outputMode = config.outputMode;
+    this._bundleName = config.bundleName;
   }
 
   setOutputMode(mode) {

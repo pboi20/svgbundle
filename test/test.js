@@ -38,10 +38,23 @@ bundler.process().then(() => {
 
 /*** Test config ***/
 
-const modes = [SvgBundle.JSON, SvgBundle.ESM, SvgBundle.UMD];
-for (let mode of modes) {
-  let bundler = new SvgBundle({ outputMode: mode});
-  if (mode !== bundler._outputMode) {
-    throw `Expected '${mode}', got '${bundler._outputMode}'`;
+function testIs(a, b) {
+  if (a !== b) {
+    throw `Expected '${a}', got '${b}'`;
   }
 }
+
+{
+  const modes = [SvgBundle.JSON, SvgBundle.ESM, SvgBundle.UMD];
+  for (let mode of modes) {
+    let bundler = new SvgBundle({ outputMode: mode});
+    testIs(mode, bundler._outputMode);
+  }
+}
+
+{
+  const bundleName = "Testing";
+  let bundler = new SvgBundle({ bundleName });
+  testIs(bundleName, bundler._bundleName);
+}
+
