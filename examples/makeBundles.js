@@ -20,15 +20,15 @@ for (file of inputFiles) {
 }
 
 bundler.process().then(() => {
-  const jsonFile = path.resolve(__dirname, "bundles/bundle.json");
+  const jsonFile = path.resolve(__dirname, "bundles/shapes.json");
   bundler.save(jsonFile);
 
-  const esmFile = path.resolve(__dirname, "bundles/bundle.js");
+  const esmFile = path.resolve(__dirname, "bundles/shapes.js");
   bundler.setOutputMode(SvgBundle.ESM);
   bundler.save(esmFile);
 
-  const umdFile = path.resolve(__dirname, "bundles/bundle-umd.js");
+  const umdFile = path.resolve(__dirname, "bundles/shapes-umd.js");
   bundler.setOutputMode(SvgBundle.UMD);
-  bundler.setBundleName("TestSvgBundle");
+  bundler.setBundleName("Shapes");
   bundler.save(umdFile);
 });
