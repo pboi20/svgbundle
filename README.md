@@ -41,7 +41,7 @@ svgbundle -o arrows-bundle.json up.svg down.svg left.svg right.svg
 
 #### Nodejs
 
-```
+```js
 const svgb = require("svgbundle")
 
 new svgb({
