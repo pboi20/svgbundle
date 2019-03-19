@@ -11,7 +11,7 @@ svgbundle is a Nodejs utility for optimizing and bundling multiple SVG files int
 ### Installation
 
 ```
-npm install -g pboi20/svgbundle
+npm install -g @pboi20/svgbundle
 ```
 
 
