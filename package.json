@@ -1,5 +1,5 @@
 {
-  "name": "svgbundle",
+  "name": "@pboi20/svgbundle",
   "version": "0.1.0",
   "description": "Optimize and bundle SVG files into JS modules",
   "keywords": [
