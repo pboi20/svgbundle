@@ -27,9 +27,10 @@ positional arguments:
   INPUT_FILES             Input files to be optimized and bundled.
 
 optional arguments:
-  -m MODE, --mode=MODE    Output mode. (Choices: json, esm, umd. Default: json.)
+  -h, --help              Show help.
+  -m MODE, --mode=MODE    Output mode. (Choices: json, esm, umd. Default: json)
   -n NAME, --name=NAME    Bundle name to be used with UMD output.
-  -o FILE, --output=FILE  Output file name. (Default: STDOUT.)
+  -o FILE, --output=FILE  Output file name. (Default: STDOUT)
 ```
 
 Example:
