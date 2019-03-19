@@ -4,8 +4,7 @@ const commandLineArgs = require("command-line-args")
 
 const SvgBundle = require("./svgbundle");
 
-function usage() {
-  console.log(`usage: svgbundle [OPTIONS] INPUT_FILES
+const USAGE = `usage: svgbundle [OPTIONS] INPUT_FILES
 
 positional arguments:
   INPUT_FILES             Input files to be optimized and bundled.
@@ -15,11 +14,10 @@ optional arguments:
   -m MODE, --mode=MODE    Output mode. (Choices: json, esm, umd. Default: json)
   -n NAME, --name=NAME    Bundle name to be used with UMD output.
   -o FILE, --output=FILE  Output file name. (Default: STDOUT)
-`);
-}
+`;
 
-function error(message) {
-  console.error(`Error - ${message}`);
+function error(message, prefix="ERROR - ") {
+  console.error(`${prefix}${message}`);
   process.exit(1);
 }
 
@@ -48,16 +46,27 @@ function getConfig(options) {
 }
 
 function main() {
-  const options = commandLineArgs([
+  const args = [
     { name: "input", multiple: true, defaultOption: true },
     { name: "help", alias: "h", type: Boolean },
     { name: "mode", alias: "m", type: String },
     { name: "name", alias: "n", type: String },
     { name: "output", alias: "o", type: String },
-  ]);
+  ];
+
+  let options;
+  try {
+    options = commandLineArgs(args);
+  } catch (e) {
+    if (e.name == "UNKNOWN_OPTION") {
+      error(`Unknown option: ${e.optionName}\n\n${USAGE}`);
+    } else {
+      throw e;
+    }
+  }
 
   if (options.help) {
-    usage();
+    console.log(USAGE);
     process.exit(0);
   }
 
