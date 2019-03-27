@@ -45,7 +45,7 @@ svgbundle -o arrows-bundle.json up.svg down.svg left.svg right.svg
 Example:
 
 ```js
-const svgb = require("svgbundle")
+const svgb = require("@pboi20/svgbundle")
 
 new svgb({
   outputMode: svgb.UMD,
